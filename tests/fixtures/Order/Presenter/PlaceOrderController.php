@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\Order\Presenter;
+namespace JulianaSaran\CleanArchChecker\fixtures\Order\Presenter;
 
 class PlaceOrderController
 {

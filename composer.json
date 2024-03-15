@@ -13,12 +13,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Julianasaran\\CleanArchChecker\\": "src/"
+            "JulianaSaran\\CleanArchChecker\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Julianasaran\\CleanArchChecker\\": "tests/"
+            "JulianaSaran\\CleanArchChecker\\": "tests/"
         }
     },
     "authors": [

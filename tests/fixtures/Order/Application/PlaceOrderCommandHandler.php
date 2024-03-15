@@ -1,9 +1,9 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\Order\Application;
+namespace JulianaSaran\CleanArchChecker\fixtures\Order\Application;
 
-use Julianasaran\CleanArchChecker\fixtures\Order\Domain\Orders;
-use Julianasaran\CleanArchChecker\fixtures\User\Domain\Users;
+use JulianaSaran\CleanArchChecker\fixtures\Order\Domain\Orders;
+use JulianaSaran\CleanArchChecker\fixtures\User\Domain\Users;
 
 class PlaceOrderCommandHandler
 {

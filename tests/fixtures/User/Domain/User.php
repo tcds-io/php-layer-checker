@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\User\Domain;
+namespace JulianaSaran\CleanArchChecker\fixtures\User\Domain;
 
 class User
 {

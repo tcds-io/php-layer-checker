@@ -1,11 +1,11 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\User\Infrastructure;
+namespace JulianaSaran\CleanArchChecker\fixtures\User\Infrastructure;
 
 use DateTime;
 use Exception;
-use Julianasaran\CleanArchChecker\fixtures\User\Domain\User;
-use Julianasaran\CleanArchChecker\fixtures\User\Domain\Users;
+use JulianaSaran\CleanArchChecker\fixtures\User\Domain\User;
+use JulianaSaran\CleanArchChecker\fixtures\User\Domain\Users;
 
 class DatabaseUsers implements Users
 {

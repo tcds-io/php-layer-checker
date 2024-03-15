@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Julianasaran\CleanArchChecker;
+namespace JulianaSaran\CleanArchChecker;
 
 class LayerChecker
 {
@@ -30,15 +30,20 @@ class LayerChecker
         $lines = explode("\n", $classContent);
         $uses = array_filter(
             array: $lines,
-            callback: fn(string $use) => str_starts_with(trim($use), "use ")
+            callback: fn(string $use) => str_starts_with(trim($use), "use "),
         );
 
-        $namespace = $namespaces[0] ?? '';
+        /**
+         * At least for now, we want to allow php standard classes to be used, it might change in the future
+         */
+        $leaking = array_filter(array: $uses, callback: fn(string $use) => str_contains($use, "\\"));
 
-        $leaking = array_filter(
-            array: $uses,
-            callback: fn(string $use) => !str_contains($use, $namespace),
-        );
+        foreach ($namespaces as $namespace) {
+            $leaking = array_filter(
+                array: $leaking,
+                callback: fn(string $use) => !str_contains($use, $namespace),
+            );
+        }
 
         return array_values($leaking);
     }
@@ -60,7 +65,7 @@ class LayerChecker
         return array_reduce($directories, function (array $files, string $dir) use ($pattern, $flags): array {
             return array_merge(
                 $files,
-                $this->rglob($dir . '/' . basename($pattern), $flags)
+                $this->rglob($dir . '/' . basename($pattern), $flags),
             );
         }, $files);
     }

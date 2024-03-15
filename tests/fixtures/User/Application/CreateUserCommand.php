@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\User\Application;
+namespace JulianaSaran\CleanArchChecker\fixtures\User\Application;
 
 class CreateUserCommand
 {

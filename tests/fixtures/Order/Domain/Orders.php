@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\Order\Domain;
+namespace JulianaSaran\CleanArchChecker\fixtures\Order\Domain;
 
 interface Orders
 {

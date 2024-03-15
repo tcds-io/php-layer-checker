@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\Order\Application;
+namespace JulianaSaran\CleanArchChecker\fixtures\Order\Application;
 
 class PlaceOrderCommand
 {

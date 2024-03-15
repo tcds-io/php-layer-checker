@@ -1,6 +1,6 @@
 <?php
 
-namespace Julianasaran\CleanArchChecker\fixtures\Order\Infrastructure;
+namespace JulianaSaran\CleanArchChecker\fixtures\Order\Infrastructure;
 
 class OrdersTable
 {
