@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+declare (strict_types=1);
+
+use JulianaSaran\CleanArchChecker\LayerChecker;
+use JulianaSaran\CleanArchChecker\ModulesChecker;
+
+$paths = ['/../..', '/..', ''];
+
+$_config = [];
+
+foreach ($paths as $path) {
+    $autoload = "$path/autoload.php";
+    $config = "$path/player.json";
+
+    if (is_file($autoload)) include $autoload;;
+    if (is_file($autoload)) include array_push($_config, ...require $config);;
+}
+
+$layerChecker = new LayerChecker();
+$moduleChecker = new ModulesChecker($layerChecker);
+$moduleChecker->check($_config);
