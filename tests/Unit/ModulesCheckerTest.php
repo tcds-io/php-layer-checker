@@ -1,10 +1,10 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\Unit;
+namespace Tcds\Io\Player\Unit;
 
-use JulianaSaran\CleanArchChecker\LayerChecker;
-use JulianaSaran\CleanArchChecker\ModulesChecker;
 use PHPUnit\Framework\TestCase;
+use Tcds\Io\Player\LayerChecker;
+use Tcds\Io\Player\ModulesChecker;
 
 class ModulesCheckerTest extends TestCase
 {
@@ -19,15 +19,15 @@ class ModulesCheckerTest extends TestCase
                 [
                     'module' => 'Order/Application',
                     'accepts' => [
-                        'JulianaSaran\CleanArchChecker\fixtures\Order\Application',
-                        'JulianaSaran\CleanArchChecker\fixtures\Order\Domain',
+                        'Tcds\Io\Player\fixtures\Order\Application',
+                        'Tcds\Io\Player\fixtures\Order\Domain',
                     ],
                 ],
                 [
                     'module' => 'User/Application',
                     'accepts' => [
-                        'JulianaSaran\CleanArchChecker\fixtures\User\Application',
-                        'JulianaSaran\CleanArchChecker\fixtures\User\Domain',
+                        'Tcds\Io\Player\fixtures\User\Application',
+                        'Tcds\Io\Player\fixtures\User\Domain',
                     ],
                 ],
             ],
@@ -41,7 +41,7 @@ class ModulesCheckerTest extends TestCase
         $this->assertEquals(
             expected: [
                 '/Order/Application/PlaceOrderCommandHandler.php' => [
-                    'use JulianaSaran\CleanArchChecker\fixtures\User\Domain\Users;'
+                    'use Tcds\Io\Player\fixtures\User\Domain\Users;',
                 ],
             ],
             actual: $leaking,

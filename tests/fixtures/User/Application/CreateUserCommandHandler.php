@@ -1,14 +1,13 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\User\Application;
+namespace Tcds\Io\Player\fixtures\User\Application;
 
-use JulianaSaran\CleanArchChecker\fixtures\User\Domain\Users;
+use Tcds\Io\Player\fixtures\User\Domain\Users;
 
 class CreateUserCommandHandler
 {
     public function __construct(
         private Users $users,
-    )
-    {
+    ) {
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\User\Application;
+namespace Tcds\Io\Player\fixtures\User\Application;
 
 class CreateUserCommand
 {
-
 }

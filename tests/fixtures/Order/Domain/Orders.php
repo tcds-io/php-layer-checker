@@ -1,6 +1,6 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\Order\Domain;
+namespace Tcds\Io\Player\fixtures\Order\Domain;
 
 interface Orders
 {

@@ -1,8 +1,7 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\Order\Presenter;
+namespace Tcds\Io\Player\fixtures\Order\Presenter;
 
 class PlaceOrderController
 {
-
 }

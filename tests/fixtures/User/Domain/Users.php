@@ -1,6 +1,6 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\User\Domain;
+namespace Tcds\Io\Player\fixtures\User\Domain;
 
 interface Users
 {

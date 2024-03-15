@@ -1,9 +1,9 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\Order\Domain;
+namespace Tcds\Io\Player\fixtures\Order\Domain;
 
 use DateTime;
-use JulianaSaran\CleanArchChecker\fixtures\User\Domain\User;
+use Tcds\Io\Player\fixtures\User\Domain\User;
 
 class Order
 {

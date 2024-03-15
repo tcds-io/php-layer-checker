@@ -3,8 +3,8 @@
 
 declare (strict_types=1);
 
-use JulianaSaran\CleanArchChecker\LayerChecker;
-use JulianaSaran\CleanArchChecker\ModulesChecker;
+use Tcds\Io\Player\LayerChecker;
+use Tcds\Io\Player\ModulesChecker;
 
 $paths = ['/../..', '/..', ''];
 

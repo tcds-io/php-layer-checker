@@ -1,8 +1,7 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\Order\Application;
+namespace Tcds\Io\Player\fixtures\Order\Application;
 
 class PlaceOrderCommand
 {
-
 }

@@ -1,8 +1,7 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\Order\Infrastructure;
+namespace Tcds\Io\Player\fixtures\Order\Infrastructure;
 
 class OrdersTable
 {
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker;
+namespace Tcds\Io\Player;
 
 class ModulesChecker
 {

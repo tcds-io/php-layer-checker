@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JulianaSaran\CleanArchChecker;
+namespace Tcds\Io\Player;
 
 class LayerChecker
 {

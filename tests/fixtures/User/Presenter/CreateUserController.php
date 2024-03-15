@@ -1,10 +1,10 @@
 <?php
 
-namespace JulianaSaran\CleanArchChecker\fixtures\User\Presenter;
+namespace Tcds\Io\Player\fixtures\User\Presenter;
 
 use Exception;
-use JulianaSaran\CleanArchChecker\fixtures\User\Application\CreateUserCommandHandler;
-use JulianaSaran\CleanArchChecker\fixtures\User\Domain\User;
+use Tcds\Io\Player\fixtures\User\Application\CreateUserCommandHandler;
+use Tcds\Io\Player\fixtures\User\Domain\User;
 
 class CreateUserController
 {
