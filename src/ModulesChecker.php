@@ -26,9 +26,11 @@ readonly class ModulesChecker
 
             $result = $this->layer->check($path, $module, $accepts);
 
-            if ($result !== []) {
-                $leaking = array_merge($leaking, $result);
+            if ($result === []) {
+                continue;
             }
+
+            $leaking[$module] = $result;
         }
 
         return $leaking;

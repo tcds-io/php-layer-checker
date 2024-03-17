@@ -3,6 +3,7 @@
 namespace Tcds\Io\Player;
 
 use Exception;
+use Tcds\Io\Player\Exception\UnacceptableUsagesException;
 
 readonly class Player
 {
@@ -17,7 +18,32 @@ readonly class Player
      */
     public function check(array $config): void
     {
-        $this->checker->check($config);
+        $leaking = $this->checker->check($config);
+
+        if ([] === $leaking) {
+            return;
+        }
+
+        $error = [];
+
+        foreach ($leaking as $classes) {
+            /**
+             * Not good
+             */
+            foreach ($classes as $class => $imports) {
+                /**
+                 * Noooooooot good
+                 */
+                foreach ($imports as $import) {
+                    /**
+                     * @TODO: change base checker to return the proper format right away
+                     */
+                    $error[$class][] = $import;
+                }
+            }
+        }
+
+        throw new UnacceptableUsagesException($error);
     }
 
     public static function create(): Player

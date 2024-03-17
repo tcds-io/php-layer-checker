@@ -3,10 +3,27 @@
 
 declare (strict_types=1);
 
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Tcds\Io\Player\Exception\UnacceptableUsagesException;
 use Tcds\Io\Player\Player;
 
 include __DIR__ . '/../../autoload.php' ?? throw new Exception('Missing ');
 $config = json_decode(file_get_contents(__DIR__ . '/../../../player.json'), true);
+$console = new ConsoleOutput();
+$separator = str_repeat('-', 120);
 
-$player = Player::create();
-$player->check($config);
+try {
+    $player = Player::create();
+    $player->check($config);
+} catch (UnacceptableUsagesException $exception) {
+    foreach ($exception->leaking as $class => $imports) {
+        $console->writeln($separator);
+        $console->writeln("<info>$class</info>");
+        $console->writeln($separator);
+        $console->writeln(join(PHP_EOL, $imports));
+        $console->writeln($separator);
+        $console->writeln('');
+    }
+
+    exit(1);
+}

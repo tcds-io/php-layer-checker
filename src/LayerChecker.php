@@ -13,11 +13,10 @@ class LayerChecker
         $leaking = [];
 
         foreach ($files as $file) {
-            $key = str_replace($basepath, '', $file);
             $value = $this->checkFile($file, $namespaces);
 
             if ($value != []) {
-                $leaking[$key] = $value;
+                $leaking[$file] = $value;
             }
         }
 
@@ -45,7 +44,10 @@ class LayerChecker
             );
         }
 
-        return array_values($leaking);
+        return array_map(
+            fn (string $use) => str_replace('use ', '- ', rtrim($use, ';')),
+            array_values($leaking),
+        );
     }
 
     private function rglob(string $pattern, int $flags = 0): array
