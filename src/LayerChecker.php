@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tcds\Io\Player;
 
-class LayerChecker
+readonly class LayerChecker
 {
     public function check(string $basepath, string $layer, array $namespaces): array
     {

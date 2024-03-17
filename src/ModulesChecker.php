@@ -20,9 +20,9 @@ readonly class ModulesChecker
         $path = $config['basepath'] ?? throw new Exception('Configuration is missing `basepath` property');
         $modules = $config['modules'] ?? [];
 
-        foreach ($modules as $module) {
-            $module = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
-            $accepts = $module['accepts'] ?? [];
+        foreach ($modules as $layer) {
+            $module = $layer['module'] ?? throw new Exception('Configuration is missing `module` property');
+            $accepts = $layer['accepts'] ?? [];
 
             $result = $this->layer->check($path, $module, $accepts);
 
