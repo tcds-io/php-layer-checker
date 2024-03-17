@@ -11,10 +11,17 @@ include __DIR__ . '/../../autoload.php' ?? throw new Exception('Missing ');
 $config = json_decode(file_get_contents(__DIR__ . '/../../../player.json'), true);
 $console = new ConsoleOutput();
 $separator = str_repeat('-', 120);
+$greanline = '<fg=black;bg=green>' . str_repeat(' ', 105) . '</>';
+$success = str_pad('[OK] No leaking imports', 105, ' ', STR_PAD_RIGHT);
 
 try {
     $player = Player::create();
     $player->check($config);
+    $console->writeln("");
+    $console->writeln($greanline);
+    $console->writeln("<fg=black;bg=green>$success</>");
+    $console->writeln($greanline);
+    $console->writeln("");
 } catch (UnacceptableUsagesException $exception) {
     foreach ($exception->leaking as $class => $imports) {
         $console->writeln($separator);
