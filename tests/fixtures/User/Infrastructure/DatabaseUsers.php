@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tcds\Io\Player\fixtures\User\Infrastructure;
 
 use Exception;
@@ -13,4 +15,3 @@ class DatabaseUsers implements Users
         throw new Exception("NOT IMPLEMENTED");
     }
 }
-

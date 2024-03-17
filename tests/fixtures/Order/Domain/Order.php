@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tcds\Io\Player\fixtures\Order\Domain;
 
 use DateTime;
@@ -11,11 +13,7 @@ class Order
     public User $customer;
     public DateTime $placedAt;
 
-    public function __construct(
-        string   $id,
-        User     $customer,
-        DateTime $placedAt,
-    )
+    public function __construct(string $id, User $customer, DateTime $placedAt,)
     {
         $this->id = $id;
         $this->customer = $customer;

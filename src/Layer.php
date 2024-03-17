@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace Tcds\Io\Player;
 
-readonly class LayerChecker
+use Exception;
+
+readonly class Layer
 {
+    /**
+     * @param array<string> $namespaces
+     * @return array<string, array<string>>
+     */
     public function check(string $basepath, string $layer, array $namespaces): array
     {
         $directory = rtrim("$basepath/$layer", '/');
@@ -15,17 +21,23 @@ readonly class LayerChecker
         foreach ($files as $file) {
             $value = $this->checkFile($file, $namespaces);
 
-            if ($value != []) {
-                $leaking[$file] = $value;
+            if ($value === []) {
+                continue;
             }
+
+            $leaking[$file] = $value;
         }
 
         return $leaking;
     }
 
+    /**
+     * @param array<string> $namespaces
+     * @return array<string>
+     */
     private function checkFile(string $file, array $namespaces): array
     {
-        $classContent = file_get_contents($file);
+        $classContent = file_get_contents($file) ?: throw new Exception("Could not load file <$file>");
         $lines = explode("\n", $classContent);
         $uses = array_filter(
             array: $lines,
@@ -45,11 +57,14 @@ readonly class LayerChecker
         }
 
         return array_map(
-            fn (string $use) => str_replace('use ', '- ', rtrim($use, ';')),
+            fn(string $use) => str_replace('use ', '- ', rtrim($use, ';')),
             array_values($leaking),
         );
     }
 
+    /**
+     * @return array<string>
+     */
     private function rglob(string $pattern, int $flags = 0): array
     {
         $files = glob($pattern, $flags);
@@ -58,7 +73,7 @@ readonly class LayerChecker
             $files = [];
         }
 
-        $directories = glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) ?? [];
+        $directories = glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT);
 
         if (!$directories) {
             $directories = [];
