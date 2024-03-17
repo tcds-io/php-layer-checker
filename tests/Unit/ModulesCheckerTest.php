@@ -33,6 +33,8 @@ class ModulesCheckerTest extends TestCase
             ],
         ];
 
+        dd(json_encode($config));
+
         $layerChecker = new LayerChecker();
         $moduleChecker = new ModulesChecker($layerChecker);
 

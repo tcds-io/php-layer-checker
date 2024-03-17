@@ -3,26 +3,10 @@
 
 declare (strict_types=1);
 
-use Tcds\Io\Player\LayerChecker;
-use Tcds\Io\Player\ModulesChecker;
+use Tcds\Io\Player\Player;
 
-$paths = [
-    realpath(__DIR__ . '/../../..'),
-    realpath(__DIR__ . '/../..'),
-    realpath(__DIR__ . '/..'),
-    realpath(__DIR__ . '/'),
-];
+include __DIR__ . '/../../autoload.php' ?? throw new Exception('Missing ');
+$config = json_decode(file_get_contents(__DIR__ . '/../../../player.json'), true);
 
-$_config = ['modules' => []];
-
-foreach ($paths as $path) {
-    $autoload = "$path/autoload.php";
-    $config = "$path/player.json";
-
-    if (is_file($autoload)) include $autoload;;
-    if (is_file($config)) include array_push($_config, ...require $config);;
-}
-
-$layerChecker = new LayerChecker();
-$moduleChecker = new ModulesChecker($layerChecker);
-$moduleChecker->check($_config);
+$player = Player::create();
+$player->check($config);
