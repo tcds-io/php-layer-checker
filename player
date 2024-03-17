@@ -8,7 +8,16 @@ use Tcds\Io\Player\Exception\UnacceptableUsagesException;
 use Tcds\Io\Player\Player;
 
 include __DIR__ . '/../../autoload.php' ?? throw new Exception('Missing ');
-$config = json_decode(file_get_contents(__DIR__ . '/../../../player.json'), true);
+$playerFile = __DIR__ . '/../../../player.php';
+
+/**
+ * creates config
+ */
+if (!is_file($playerFile)) {
+    copy(__DIR__ . '/player.php.sample', $playerFile);
+}
+
+$config = include __DIR__ . '/../../../player.php';
 $console = new ConsoleOutput();
 $separator = str_repeat('-', 120);
 $greanline = '<fg=black;bg=green>' . str_repeat(' ', 105) . '</>';

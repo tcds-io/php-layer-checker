@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'basepath' => 'app',
+    'default' => [
+        // allow namespaces application wide, ex:
+        'Carbon\\CarbonImmutable',
+    ],
+    'modules' => [
+        [
+            'module' => 'First/Module/Path',
+            'accepts' => [
+                'Allowed\\Namespace',
+            ],
+        ],
+        [
+            'module' => 'Second/Module/Path',
+            'extends' => [
+                // extends config from a different module
+                'First/Module/Path',
+            ],
+            'accepts' => [
+                'Allowed\\Namespace',
+            ],
+        ],
+        // ... define other modules
+    ],
+];

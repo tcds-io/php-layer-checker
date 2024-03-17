@@ -34,17 +34,33 @@ readonly class Player
 
         $layers = [];
 
+        /**
+         * Define basic accepted imports
+         */
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
             $accepts = array_merge($module['accepts'] ?? [], $default);
 
-            $layers[$name] = $accepts;
+            $layers[$name] = array_merge($accepts, $default);
+        }
+
+        /**
+         * Define add extension imports
+         */
+        foreach ($modules as $module) {
+            $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
+            $extends = array_map(fn(string $extend) => $layers[$extend] ?? [], $module['extends'] ?? []);
+
+            $layers[$name] = array_values(
+                array_unique(
+                    array_merge($layers[$name], ...$extends),
+                ),
+            );
         }
 
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
-            $extends = array_map(fn(string $extend) => $layers[$extend] ?? [], $module['extends'] ?? []);
-            $accepts = array_merge($module['accepts'] ?? [], $default, ...$extends);
+            $accepts = array_merge($layers[$name] ?? []);
 
             $result = $this->layer->check($path, $name, $accepts);
 
