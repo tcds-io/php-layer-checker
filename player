@@ -6,16 +6,21 @@ declare (strict_types=1);
 use Tcds\Io\Player\LayerChecker;
 use Tcds\Io\Player\ModulesChecker;
 
-$paths = ['/../..', '/..', ''];
+$paths = [
+    realpath(__DIR__ . '/../../..'),
+    realpath(__DIR__ . '/../..'),
+    realpath(__DIR__ . '/..'),
+    realpath(__DIR__ . '/'),
+];
 
-$_config = [];
+$_config = ['modules' => []];
 
 foreach ($paths as $path) {
     $autoload = "$path/autoload.php";
     $config = "$path/player.json";
 
     if (is_file($autoload)) include $autoload;;
-    if (is_file($autoload)) include array_push($_config, ...require $config);;
+    if (is_file($config)) include array_push($_config, ...require $config);;
 }
 
 $layerChecker = new LayerChecker();
