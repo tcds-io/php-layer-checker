@@ -21,6 +21,7 @@ readonly class Player
      *          module?: string,
      *          extends?: array<string>,
      *          accepts?: array<string>,
+     *          needs?: array<string>,
      *     }>,
      * } $config
      * @throws Exception
@@ -45,7 +46,7 @@ readonly class Player
         }
 
         /**
-         * Define add extension imports
+         * Extends modules acceptable imports by its extensions
          */
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
@@ -60,7 +61,8 @@ readonly class Player
 
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
-            $accepts = array_merge($layers[$name] ?? []);
+            $needs = $module['needs'] ?? [];
+            $accepts = array_merge($layers[$name] ?? [], $needs);
 
             $result = $this->layer->check($path, $name, $accepts);
 

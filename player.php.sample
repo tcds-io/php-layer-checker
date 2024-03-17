@@ -1,28 +1,49 @@
 <?php
 
 return [
+    /**
+     * Define the base path, where modules would live in
+     */
     'basepath' => 'app',
+
+    /**
+     * Allow namespaces application wide:
+     */
     'default' => [
-        // allow namespaces application wide, ex:
-        'Carbon\\CarbonImmutable',
+        // ex: 'Carbon\\CarbonImmutable',
     ],
+
+    /**
+     * Define each module to be checked
+     */
     'modules' => [
         [
+            /**
+             * Define the module path, excluding the basepath
+             */
             'module' => 'First/Module/Path',
+
+            /**
+             * Add here module dependencies that should not be extended by other modules
+             */
+            'needs' => [
+                // ex: 'My\\Custom\\Auth\\Implementation'
+            ],
+
+            /**
+             * Define which namespaces should be allowed in this module and can be extended by other modules
+             */
             'accepts' => [
                 'Allowed\\Namespace',
             ],
-        ],
-        [
-            'module' => 'Second/Module/Path',
+
+            /**
+             * Extends config from a different module:
+             */
             'extends' => [
-                // extends config from a different module
-                'First/Module/Path',
-            ],
-            'accepts' => [
-                'Allowed\\Namespace',
+                // ex: 'First/Module/Path',
             ],
         ],
-        // ... define other modules
+        // ... Define other modules
     ],
 ];
