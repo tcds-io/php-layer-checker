@@ -13,7 +13,11 @@ readonly class Player
     }
 
     /**
-     * @param array{basepath:string, modules: array{modules:string, accepts: array<string>}} $config
+     * @param array{
+     *     basepath:string,
+     *     default:array<string>,
+     *     modules: array{module:string, accepts: array<string>}
+     * } $config
      * @throws Exception
      */
     public function check(array $config): void

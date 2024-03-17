@@ -11,7 +11,11 @@ readonly class ModulesChecker
     }
 
     /**
-     * @param array{basepath:string, modules: array{module:string, accepts: array<string>}} $config
+     * @param array{
+     *     basepath:string,
+     *     default:array<string>,
+     *     modules: array{module:string, accepts: array<string>}
+     * } $config
      * @throws Exception
      */
     public function check(array $config): array
@@ -19,10 +23,11 @@ readonly class ModulesChecker
         $leaking = [];
         $path = $config['basepath'] ?? throw new Exception('Configuration is missing `basepath` property');
         $modules = $config['modules'] ?? [];
+        $default = $config['default'] ?? [];
 
         foreach ($modules as $layer) {
             $module = $layer['module'] ?? throw new Exception('Configuration is missing `module` property');
-            $accepts = $layer['accepts'] ?? [];
+            $accepts = array_merge($layer['accepts'] ?? [], $default);
 
             $result = $this->layer->check($path, $module, $accepts);
 
