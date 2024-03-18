@@ -17,11 +17,16 @@ if (!is_file($playerFile)) {
     copy(__DIR__ . '/player.php.sample', $playerFile);
 }
 
+function line(string $text, string $fill = ' '): string
+{
+    return str_pad($text, 120, $fill, STR_PAD_RIGHT);
+}
+
 $config = include __DIR__ . '/../../../player.php';
 $console = new ConsoleOutput();
-$separator = str_repeat('-', 120);
-$greanline = '<fg=black;bg=green>' . str_repeat(' ', 105) . '</>';
-$success = str_pad(' [OK] No leaking imports', 120, ' ', STR_PAD_RIGHT);
+$separator = line('', '-');
+$greanline = '<fg=black;bg=green>' . line('') . '</>';
+$success = line(' [OK] No leaking imports');
 
 try {
     Player::create()->check($config);
@@ -43,9 +48,9 @@ try {
 
     $total = array_reduce($exception->leaking, fn(int $reduced, array $imports) => $reduced + count($imports), 0);
 
-    $redline = '<fg=black;bg=red>' . str_repeat(' ', 120) . '</>';
+    $redline = '<fg=black;bg=red>' . line('') . '</>';
     $message = sprintf(' [ERROR] Found %s unacceptable imports in %s classes', $total, count($exception->leaking));
-    $error = str_pad($message, 120, ' ', STR_PAD_RIGHT);
+    $error = line($message);
 
     $console->writeln($redline);
     $console->writeln("<fg=white;bg=red>$error</>");
