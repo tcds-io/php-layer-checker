@@ -17,6 +17,7 @@ readonly class Player
      * @param array{
      *     basepath?: string,
      *     default?: array<string>,
+     *     presets?: array<string>,
      *     modules?: array<array{
      *          module?: string,
      *          extends?: array<string>,
@@ -32,6 +33,7 @@ readonly class Player
         $path = $config['basepath'] ?? throw new Exception('Configuration is missing `basepath` property');
         $modules = $config['modules'] ?? [];
         $default = $config['default'] ?? [];
+        $presets = $config['presets'] ?? [];
 
         $layers = [];
 
@@ -50,7 +52,10 @@ readonly class Player
          */
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
-            $extends = array_map(fn(string $extend) => $layers[$extend] ?? [], $module['extends'] ?? []);
+            $extends = array_map(
+                fn(string $extend) => $layers[$extend] ?? $presets[$extend] ?? [],
+                $module['extends'] ?? [],
+            );
 
             $layers[$name] = array_values(
                 array_unique(

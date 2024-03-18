@@ -14,6 +14,17 @@ return [
     ],
 
     /**
+     * Define presets to be extended in modules
+     */
+    'presets' => [
+        // 'laravel-http' => [
+        //     'Illuminate\\Foundation',
+        //     'Illuminate\\Routing',
+        //     'Illuminate\\Http',
+        // ],
+    ],
+
+    /**
      * Define each module to be checked
      */
     'modules' => [
@@ -41,7 +52,8 @@ return [
              * Extends config from a different module:
              */
             'extends' => [
-                // ex: 'First/Module/Path',
+                // 'First/Module/Path',
+                // 'laravel-http',
             ],
         ],
         // ... Define other modules

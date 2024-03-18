@@ -21,11 +21,11 @@ $config = include __DIR__ . '/../../../player.php';
 $console = new ConsoleOutput();
 $separator = str_repeat('-', 120);
 $greanline = '<fg=black;bg=green>' . str_repeat(' ', 105) . '</>';
-$success = str_pad('[OK] No leaking imports', 105, ' ', STR_PAD_RIGHT);
+$success = str_pad(' [OK] No leaking imports', 120, ' ', STR_PAD_RIGHT);
 
 try {
-    $player = Player::create();
-    $player->check($config);
+    Player::create()->check($config);
+
     $console->writeln("");
     $console->writeln($greanline);
     $console->writeln("<fg=black;bg=green>$success</>");
@@ -40,6 +40,17 @@ try {
         $console->writeln($separator);
         $console->writeln('');
     }
+
+    $total = array_reduce($exception->leaking, fn(int $reduced, array $imports) => $reduced + count($imports), 0);
+
+    $redline = '<fg=black;bg=red>' . str_repeat(' ', 120) . '</>';
+    $message = sprintf(' [ERROR] Found %s unacceptable imports in %s classes', $total, count($exception->leaking));
+    $error = str_pad($message, 120, ' ', STR_PAD_RIGHT);
+
+    $console->writeln($redline);
+    $console->writeln("<fg=white;bg=red>$error</>");
+    $console->writeln($redline);
+    $console->writeln('');
 
     exit(1);
 }
