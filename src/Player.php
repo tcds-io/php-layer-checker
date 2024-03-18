@@ -17,7 +17,7 @@ readonly class Player
      * @param array{
      *     basepath?: string,
      *     default?: array<string>,
-     *     presets?: array<string>,
+     *     presets?: array<string, array<string>>,
      *     modules?: array<array{
      *          module?: string,
      *          extends?: array<string>,
