@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tcds\Io\Player\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Tcds\Io\Player\Exception\UnacceptableUsagesException;
+use Tcds\Io\Player\Exception\UnacceptableUsages;
 use Tcds\Io\Player\ExpectThrows;
 use Tcds\Io\Player\Layer;
 use Tcds\Io\Player\Player;
@@ -61,7 +61,7 @@ class PlayerTest extends TestCase
 
         $exception = $this->expectThrows(fn() => $moduleChecker->check($config));
 
-        assert($exception instanceof UnacceptableUsagesException);
+        assert($exception instanceof UnacceptableUsages);
         $this->assertEquals(
             expected: [
                 "$this->path/Order/Application/PlaceOrderCommandHandler.php" => [
@@ -103,7 +103,7 @@ class PlayerTest extends TestCase
 
         $exception = $this->expectThrows(fn() => $moduleChecker->check($config));
 
-        assert($exception instanceof UnacceptableUsagesException);
+        assert($exception instanceof UnacceptableUsages);
         $this->assertEquals(
             [
                 "$this->path/Order/Application/PlaceOrderCommandHandler.php" => [

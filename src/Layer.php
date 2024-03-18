@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tcds\Io\Player;
 
 use Exception;
+use Tcds\Io\Player\Exception\InvalidModuleDirectory;
 
 readonly class Layer
 {
@@ -14,7 +15,7 @@ readonly class Layer
      */
     public function check(string $basepath, string $layer, array $namespaces): array
     {
-        $directory = rtrim("$basepath/$layer", '/');
+        $directory = realpath(rtrim("$basepath/$layer", '/')) ?: throw new InvalidModuleDirectory($layer, $basepath);
         $files = $this->rglob("$directory/*.php");
         $leaking = [];
 

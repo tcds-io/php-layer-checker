@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Tcds\Io\Player;
 
 use Exception;
-use Tcds\Io\Player\Exception\UnacceptableUsagesException;
+use Tcds\Io\Player\Exception\UnacceptableUsages;
+use Tcds\Io\Player\Exception\UndefinedConfiguration;
 
 readonly class Player
 {
@@ -53,7 +54,9 @@ readonly class Player
         foreach ($modules as $module) {
             $name = $module['module'] ?? throw new Exception('Configuration is missing `module` property');
             $extends = array_map(
-                fn(string $extend) => $layers[$extend] ?? $presets[$extend] ?? [],
+                fn(string $extend) => $layers[$extend]
+                    ?? $presets[$extend]
+                    ?? throw new UndefinedConfiguration($name, $extend),
                 $module['extends'] ?? [],
             );
 
@@ -82,7 +85,7 @@ readonly class Player
             return;
         }
 
-        throw new UnacceptableUsagesException($leaking);
+        throw new UnacceptableUsages($leaking);
     }
 
     public static function create(): self

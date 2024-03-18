@@ -4,7 +4,8 @@
 declare (strict_types=1);
 
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Tcds\Io\Player\Exception\UnacceptableUsagesException;
+use Tcds\Io\Player\Exception\PlayerException;
+use Tcds\Io\Player\Formatter;
 use Tcds\Io\Player\Player;
 
 include __DIR__ . '/../../autoload.php' ?? throw new Exception('Missing ');
@@ -17,45 +18,15 @@ if (!is_file($playerFile)) {
     copy(__DIR__ . '/player.php.sample', $playerFile);
 }
 
-function line(string $text, string $fill = ' '): string
-{
-    return str_pad($text, 120, $fill, STR_PAD_RIGHT);
-}
-
 $config = include __DIR__ . '/../../../player.php';
 $console = new ConsoleOutput();
-$separator = line('', '-');
-$greanline = '<fg=black;bg=green>' . line('') . '</>';
-$success = line(' [OK] No leaking imports');
 
 try {
     Player::create()->check($config);
-
-    $console->writeln("");
-    $console->writeln($greanline);
-    $console->writeln("<fg=black;bg=green>$success</>");
-    $console->writeln($greanline);
-    $console->writeln("");
-} catch (UnacceptableUsagesException $exception) {
-    foreach ($exception->leaking as $class => $imports) {
-        $console->writeln($separator);
-        $console->writeln("<info>$class</info>");
-        $console->writeln($separator);
-        $console->writeln(join(PHP_EOL, $imports));
-        $console->writeln($separator);
-        $console->writeln('');
-    }
-
-    $total = array_reduce($exception->leaking, fn(int $reduced, array $imports) => $reduced + count($imports), 0);
-
-    $redline = '<fg=black;bg=red>' . line('') . '</>';
-    $message = sprintf(' [ERROR] Found %s unacceptable imports in %s classes', $total, count($exception->leaking));
-    $error = line($message);
-
-    $console->writeln($redline);
-    $console->writeln("<fg=white;bg=red>$error</>");
-    $console->writeln($redline);
     $console->writeln('');
+    $console->writeln(Formatter::success('No leaking imports'));
+} catch (PlayerException $exception) {
+    $console->writeln($exception->output());
 
     exit(1);
 }
