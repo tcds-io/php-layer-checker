@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Tcds\Io\Player;
 
+use Symfony\Component\Console\Terminal;
+
 class Formatter
 {
     public static function line(string $text, string $fill = ' '): string
     {
-        return str_pad($text, 120, $fill, STR_PAD_RIGHT);
+        $width = min((new Terminal())->getWidth(), 120);
+
+        return str_pad($text, $width, $fill);
     }
 
     /**
